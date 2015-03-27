@@ -1,0 +1,11 @@
+{
+  "name": "dynamo-scale",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node dynamoscale.js"
+  },
+  "dependencies": {
+	"aws-sdk": "~2.0.10"
+  }
+}

@@ -65,7 +65,7 @@ function calculateNewValue(usedCapacity, provisionedCapacity, conf) {
 			newValue = Math.ceil(usedCapacity * (1 + conf.increaseByPercent / 100));
 		}
 	} else if (usedPercent < conf.decreaseBelowPervent) {
-		newValue = Math.ceil(provisionedCapacity * (conf.decreaseByPercent / 100));
+		newValue = Math.ceil(provisionedCapacity * (1 - conf.decreaseByPercent / 100));
 
 		if(usedPercent == 0) {
 			newValue = conf.min;

@@ -59,7 +59,7 @@ The DynamoDB table configuration is set in the ```tables``` array.
     - ```increaseAbovePercent``` the percentage of utilization you have to exceed before your throughput will be scaled up
     - ```decreaseBelowPercent``` the percentage of utilization below your throughput will be scaled down
     - ```increaseByPercent``` the percentage of current provisioned throughput your table will be scaled up by (Formula to calculate throughput after next increase: ```provisioned throuput * (1 + increaseByPercent/100)```). If your consumed throughput rises above 100% it will be scaled based on the actual throughput and not on your provisioned throughput.
-    - ```decreaseByPercent``` the percentage of current provisioned throughput by which your table will be scaled down (Formula to calculate throughput after next decrease: ```provisioned throuput * (decreaseByPercent/100)```)
+    - ```decreaseByPercent``` the percentage of current provisioned throughput by which your table will be scaled down (Formula to calculate throughput after next decrease: ```provisioned throuput * (1 - decreaseByPercent/100)```)
 - ```writeCapacity``` is the same as ```readCapacity```
 
 To find the right values just play around until you hit the sweet spot.

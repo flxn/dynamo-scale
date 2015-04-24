@@ -53,7 +53,7 @@ function checkTable(tableConf, cb) {
 
 // Get new Read/Write values based on config
 function calculateNewValue(usedCapacity, provisionedCapacity, conf) {
-	newValue = 0;
+	newValue = provisionedCapacity;
 	usedPercent = Math.ceil(usedCapacity / provisionedCapacity * 100);
 	if (usedPercent > conf.increaseAbovePercent) {
 		newValue = Math.ceil(provisionedCapacity * (1 + conf.increaseByPercent / 100));
@@ -64,7 +64,7 @@ function calculateNewValue(usedCapacity, provisionedCapacity, conf) {
 		if (usedPercent > 100) {
 			newValue = Math.ceil(usedCapacity * (1 + conf.increaseByPercent / 100));
 		}
-	} else if (usedPercent < conf.decreaseBelowPervent) {
+	} else if (usedPercent < conf.decreaseBelowPercent) {
 		newValue = Math.ceil(provisionedCapacity * (1 - conf.decreaseByPercent / 100));
 
 		if(usedPercent == 0) {
@@ -138,7 +138,7 @@ function processResults(table, readsUsed, writesUsed, cb) {
 		}
 
 		// Update table if new capacity value is different from current throughput
-		if (newReads != provisionedReadCapacity || newWrites != provisionedWriteCapacity) {
+		if (!config.dryrun && newReads != provisionedReadCapacity || newWrites != provisionedWriteCapacity) {
 			table.update(newReads, newWrites, function (err, data) {
 				if (!err) {
 					log('info', 'Table has been updated (' + newReads.toString() + ', ' + newWrites.toString() + ').');
@@ -181,3 +181,4 @@ if (config.interval && config.interval > 0) {
 	log('info', 'Number of tables: ' + config.tables.length.toString());
 	repeat(0);
 }
+

@@ -4,6 +4,7 @@
 	"region": "eu-west-1",
 	"interval": 0,
 	"log": "all",
+	"dryrun": false,
 	"tables": [
 		{
 			"name": "TestTable",

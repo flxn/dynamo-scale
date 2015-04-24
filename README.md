@@ -3,12 +3,17 @@ Auto Scaling for DynamoDB
 
 **dynamo-scale** is a tool that automatically scales your Amazon DynamoDB throughput (Read/Write Capacity) based on the current utilization.
 
+Run 
+```sh
+npm install
+```
+to install the dependencies.
+
 To start dynamo-scale just run 
 ```sh
 node dynamodb.js
 ```
-Or run it via ```forever``` or whatever you like.
-But remember, that "logs" are written to stdout and not to files.
+Remember, that "logs" are written to stdout and not to files.
 
 ## Config
 The Config is a simple JSON file. Edit **config.js** according to your needs.
@@ -26,6 +31,7 @@ Next comes the general application config.
 ```
 - ```interval``` is the timeout for auto scaling checks. It is set in seconds (```0``` = only run once).
 - ```log``` defines what will be logged (on stdout). Possible values are ```all```, ```error``` or ```none```
+- ```dryrun``` (for testing) if ```true``` the table will not be updated
 
 The DynamoDB table configuration is set in the ```tables``` array.
 ```javascript
